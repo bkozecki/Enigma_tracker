@@ -1,0 +1,22 @@
+.map {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid #c0bebe;
+
+  &_filters {
+    background-color: #42484d;
+    width: 30vw;
+  }
+  &_content {
+    width: 70vw;
+  }
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}

@@ -1,20 +1,32 @@
 import { useContext } from "react";
 import AppContext from "../../store/AppContext";
+import { createPortal } from "react-dom";
 
 import "./Intro.style.scss";
 
-const Intro = () => {
+const portalEl = document.getElementById("overlays");
+
+const Backdrop = () => {
+  const ctx = useContext(AppContext);
+  return <div className={`backdrop ${ctx.appStarted && "inactive"}`} />;
+};
+
+const IntroEl = () => {
   const ctx = useContext(AppContext);
 
-  const dataCallerHandler = () => {
-    ctx.setDataCall(true);
-  };
   return (
-    <div className="intro">
-      <button className="intro_btn" onClick={dataCallerHandler}>
-        Start tracking
-      </button>
+    <div className={`intro ${ctx.appStarted && "inactive"}`}>
+      <button className="intro_btn">Launch App</button>
     </div>
+  );
+};
+
+const Intro = () => {
+  return (
+    <>
+      {createPortal(<Backdrop />, portalEl)}
+      {createPortal(<IntroEl />, portalEl)}
+    </>
   );
 };
 

@@ -4,8 +4,48 @@ import { API_URL } from "../utlis/utils";
 
 const AppContextProvider = ({ children }) => {
   const [deviceData, setDeviceData] = useState([]);
-  const [dataCall, setDataCall] = useState(false);
   const [error, setError] = useState(false);
+  const [filterChecked, setFilterChecked] = useState({
+    state: false,
+    move: false,
+  });
+
+  const devicesStateFiltered = () => {
+    const filteredDevices = [];
+    deviceData.map(
+      (device) =>
+        device.last_status === "Device Offline" && filteredDevices.push(device)
+    );
+
+    return filteredDevices;
+  };
+
+  const devicesMoveFiltered = () => {
+    const filteredDevices = [];
+
+    deviceData.map(
+      (device) => device.last_speed > 0 && filteredDevices.push(device)
+    );
+
+    return filteredDevices;
+  };
+
+  const filterHandler = (ev) => {
+    const { name, checked } = ev.target;
+    setFilterChecked((prevState) => {
+      return { ...prevState, [name]: checked };
+    });
+  };
+
+  const contextValue = {
+    deviceData,
+    error,
+    filterChecked,
+    setFilterChecked,
+    filterHandler,
+    devicesStateFiltered,
+    devicesMoveFiltered,
+  };
 
   useEffect(() => {
     const dataFetcher = async (url) => {
@@ -21,17 +61,8 @@ const AppContextProvider = ({ children }) => {
       }
     };
 
-    dataCall && dataFetcher(API_URL);
-  }, [dataCall]);
-
-  console.log(deviceData);
-
-  const contextValue = {
-    deviceData,
-    error,
-    dataCall,
-    setDataCall,
-  };
+    dataFetcher(API_URL);
+  }, []);
 
   return (
     <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>

@@ -2,10 +2,15 @@ import { createContext } from "react";
 
 const AppContext = createContext({
   //created for better autocompletion
-  devideData: [],
-  error: false,
-  dataCall: false,
-  setDataCall: () => {},
+  deviceData: [],
+  error: null,
+  appStarted: null,
+  appLauncher: () => {},
+  filterChecked: null,
+  setFilterChecked: () => {},
+  filterHandler: () => {},
+  devicesStateFiltered: () => {},
+  devicesMoveFiltered: () => {},
 });
 
 export default AppContext;
