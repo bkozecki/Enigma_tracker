@@ -14,6 +14,7 @@ const Map = () => {
           <img
             src={require("../../assets/tracking.png")}
             className="logo_img"
+            alt="logo"
           />
         </div>
       </div>
