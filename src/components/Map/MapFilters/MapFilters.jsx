@@ -16,7 +16,7 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           onClick={() => setFilterActive((prevState) => !prevState)}
         />
       </h2>
-      <div className={`filters_option ${filterActive ? "option_active" : ""}`}>
+      <div className="filters_option">
         <label htmlFor="state" className="filters_label">
           Device Offline
         </label>
@@ -29,7 +29,7 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           onChange={ctx.filterHandler.bind(this)}
         />
       </div>
-      <div className={`filters_option ${filterActive ? "option_active" : ""}`}>
+      <div className="filters_option">
         <label htmlFor="move" className="filters_label">
           Device moving
         </label>
