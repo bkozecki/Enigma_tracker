@@ -8,3 +8,9 @@
   padding: 1rem;
   background-color: #ececec;
 }
+
+@media only screen and (max-width: 400px) {
+  .App {
+    padding: 0;
+  }
+}

@@ -8,6 +8,7 @@
   border-radius: 5px;
   overflow: hidden;
   border: 1px solid #c0bebe;
+  position: relative;
 
   &_sidebar {
     display: flex;
@@ -47,10 +48,15 @@
 @media only screen and (max-width: 400px) {
   .map {
     flex-direction: column-reverse;
-
     &_sidebar {
       padding: 0;
       width: 100%;
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: -20vh;
+      transition: all 0.2s linear;
+      z-index: 300;
     }
     &_content {
       width: 100%;
@@ -64,5 +70,8 @@
         height: 2rem;
       }
     }
+  }
+  .active {
+    bottom: 0;
   }
 }
