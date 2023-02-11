@@ -14,11 +14,11 @@
     flex-direction: column;
     justify-content: space-between;
     background-color: #42484d;
-    width: 30vw;
+    width: 30%;
     color: rgb(237, 236, 236);
   }
   &_content {
-    width: 70vw;
+    width: 70%;
   }
 
   .logo {
@@ -42,4 +42,27 @@
 #map {
   height: 100%;
   width: 100%;
+}
+
+@media only screen and (max-width: 400px) {
+  .map {
+    flex-direction: column-reverse;
+
+    &_sidebar {
+      padding: 0;
+      width: 100%;
+    }
+    &_content {
+      width: 100%;
+    }
+
+    .logo {
+      padding: 1rem 0;
+      font-size: 1.4rem;
+
+      &_img {
+        height: 2rem;
+      }
+    }
+  }
 }

@@ -30,3 +30,27 @@
     font-size: 1.2rem;
   }
 }
+
+@media only screen and (max-width: 400px) {
+  .filters {
+    padding: 1rem 2rem;
+
+    h2 {
+      font-size: 1.3rem;
+      padding: 0 0 1rem 0;
+      text-transform: uppercase;
+      border-bottom: 1px solid rgb(237, 236, 236);
+      margin-bottom: 1rem;
+    }
+    &_option {
+      padding: 0.5rem 0;
+    }
+    &_input,
+    &_label {
+      cursor: pointer;
+    }
+    &_label {
+      font-size: 1.4rem;
+    }
+  }
+}
