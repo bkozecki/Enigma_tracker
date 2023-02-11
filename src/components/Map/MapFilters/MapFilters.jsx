@@ -7,13 +7,12 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
 
   return (
     <div className={`filters ${filterActive ? "active" : ""}`}>
-      <h2>
+      <h2 onClick={() => setFilterActive((prevState) => !prevState)}>
         Filters{" "}
         <img
           src={require("../../../assets/arrow.png")}
           alt="arrow"
           className={filterActive ? "img_active" : ""}
-          onClick={() => setFilterActive((prevState) => !prevState)}
         />
       </h2>
       <div className="filters_option">
