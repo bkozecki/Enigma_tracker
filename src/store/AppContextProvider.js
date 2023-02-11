@@ -4,27 +4,22 @@ import { API_URL } from "../utlis/utils";
 
 const AppContextProvider = ({ children }) => {
   const [deviceData, setDeviceData] = useState([]);
-  const [error, setError] = useState(false);
   const [filterChecked, setFilterChecked] = useState({
     state: false,
     move: false,
   });
 
   const devicesStateFiltered = () => {
-    const filteredDevices = [];
-    deviceData.map(
-      (device) =>
-        device.last_status === "Device Offline" && filteredDevices.push(device)
+    const filteredDevices = deviceData.filter(
+      (device) => device.last_status !== "Device Offline"
     );
 
     return filteredDevices;
   };
 
   const devicesMoveFiltered = () => {
-    const filteredDevices = [];
-
-    deviceData.map(
-      (device) => device.last_speed > 0 && filteredDevices.push(device)
+    const filteredDevices = deviceData.filter(
+      (device) => device.last_speed > 0
     );
 
     return filteredDevices;
@@ -39,7 +34,6 @@ const AppContextProvider = ({ children }) => {
 
   const contextValue = {
     deviceData,
-    error,
     filterChecked,
     setFilterChecked,
     filterHandler,
@@ -57,7 +51,7 @@ const AppContextProvider = ({ children }) => {
         setDeviceData(data.data);
       } catch (error) {
         console.error(error);
-        setError(true);
+        alert(error);
       }
     };
 

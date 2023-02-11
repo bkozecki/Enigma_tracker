@@ -5,14 +5,12 @@ import "./MapFilters.style.scss";
 const MapFilters = () => {
   const ctx = useContext(AppContext);
 
-  console.log(ctx.filterChecked);
-
   return (
     <div className="filters">
       <h2>Filters</h2>
       <div className="filters_option">
         <label htmlFor="state" className="filters_label">
-          Device Online
+          Device Offline
         </label>
         <input
           type="checkbox"

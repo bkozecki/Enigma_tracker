@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Marker, Popup } from "react-leaflet";
 import { iconUnavailable, iconAvailable } from "../../../utlis/utils";
-import AppContext from "../../../store/AppContext";
 
 import "./MapItems.style.scss";
 
