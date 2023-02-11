@@ -7,8 +7,15 @@ import MapFilters from "./MapFilters/MapFilters";
 const Map = () => {
   return (
     <div className="map">
-      <div className="map_filters">
+      <div className="map_sidebar">
         <MapFilters />
+        <div className="logo">
+          Tracker
+          <img
+            src={require("../../assets/tracking.png")}
+            className="logo_img"
+          />
+        </div>
       </div>
       <div id="map" className="map_content">
         <MapContent />

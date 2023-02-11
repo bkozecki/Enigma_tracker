@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+
 .map {
   display: flex;
   flex-direction: row;
@@ -7,12 +9,33 @@
   overflow: hidden;
   border: 1px solid #c0bebe;
 
-  &_filters {
+  &_sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: #42484d;
     width: 30vw;
+    color: rgb(237, 236, 236);
   }
   &_content {
     width: 70vw;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    color: rgb(237, 236, 236);
+    font-family: "Montserrat", sans-serif;
+    font-size: 1.6rem;
+    padding: 2rem;
+    font-weight: 700;
+    &_img {
+      height: 3rem;
+      filter: invert(42%) sepia(40%) saturate(7307%) hue-rotate(121deg)
+        brightness(101%) contrast(102%);
+    }
   }
 }
 

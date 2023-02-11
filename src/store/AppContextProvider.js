@@ -11,7 +11,7 @@ const AppContextProvider = ({ children }) => {
 
   const devicesStateFiltered = () => {
     const filteredDevices = deviceData.filter(
-      (device) => device.last_status !== "Device Offline"
+      (device) => device.last_status === "Device Offline"
     );
 
     return filteredDevices;
