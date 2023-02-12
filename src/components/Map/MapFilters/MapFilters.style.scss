@@ -48,7 +48,7 @@
     transform: rotate(0);
   }
 }
-@media only screen and (min-width: 400px) {
+@media only screen and (min-width: 500px) {
   .filters {
     &_option {
       opacity: 1;
@@ -61,7 +61,7 @@
   }
 }
 
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 500px) {
   .filters {
     padding: 1rem 2rem;
     z-index: 2000;
