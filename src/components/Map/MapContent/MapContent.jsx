@@ -1,4 +1,4 @@
-import React, { useState, useContext, useRef } from "react";
+import React, { useState, useContext } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import AppContext from "../../../store/AppContext";
 import MapItems from "../MapItems/MapItems";
@@ -8,17 +8,9 @@ const MapContent = () => {
   const [defaultCenter, setDefaultCenter] = useState([12.36703, 12.38062]);
   const ctx = useContext(AppContext);
 
-  const mapViewRef = useRef();
-
-  const mapTest = () => {
-    const { current = {} } = mapViewRef;
-    const { leafletElement: map } = current;
-    map.setView(defaultCenter, 13);
-  };
-
   //if both filters checked, show all devices
   const devicePosition = ctx.deviceData.map((data) => (
-    <MapItems mapTest={mapTest} key={data.id} data={data} />
+    <MapItems key={data.id} data={data} />
   ));
 
   //if filters checked, show specific devices
@@ -34,12 +26,7 @@ const MapContent = () => {
   const { state, move } = ctx.filterChecked;
 
   return (
-    <MapContainer
-      center={defaultCenter}
-      zoom={6}
-      scrollWheelZoom={true}
-      ref={mapViewRef}
-    >
+    <MapContainer center={defaultCenter} zoom={5} scrollWheelZoom={true}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -22,7 +22,16 @@ const MapItems = ({ data }) => {
             <li className="popup_list_item">
               Last altitude: {data.last_altitude}
             </li>
-            <li className="popup_list_item">Last Status: {data.last_status}</li>
+            <li className={"popup_list_item"}>
+              Last Status:{" "}
+              <span
+                className={`${
+                  data.last_status === "Device Offline" ? "offline" : ""
+                }`}
+              >
+                {data.last_status}
+              </span>
+            </li>
             <li className="popup_list_item">Last speed: {data.last_speed}</li>
             <li className="popup_list_item">
               Last track time: {data.last_track_time}
