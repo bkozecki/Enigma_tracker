@@ -28,7 +28,7 @@ const MapContent = () => {
     !speedCheck ? filteredState : filteredSpeedState
   ).map((data) => <MapItems key={data.id} data={data} />);
 
-  //Device Moving filter
+  //Device Moving filter/ moving with speed
   const filteredMoveDevices = (
     !speedCheck ? filteredMove : filteredSpeedMove
   ).map((data) => <MapItems key={data.id} data={data} />);
