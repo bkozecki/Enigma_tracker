@@ -53,11 +53,7 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           className="filters_input"
           value={ctx.deviceSpeed}
           onChange={(ev) => {
-            if (ev.target.value === "") {
-              ctx.setFilterData({ state: true, move: true });
-              return;
-            }
-            ctx.setFilterData({ state: false, move: false });
+            ctx.setSpeedCheckState(true);
             ctx.setDeviceSpeed(ev.target.value);
           }}
         />

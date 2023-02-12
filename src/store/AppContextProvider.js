@@ -4,14 +4,16 @@ import { API_URL } from "../utlis/utils";
 
 const AppContextProvider = ({ children }) => {
   const [deviceData, setDeviceData] = useState([]);
-  const [deviceSpeed, setDeviceSpeed] = useState("");
+  const [deviceSpeed, setDeviceSpeed] = useState(false);
+  const [speedCheckState, setSpeedCheckState] = useState(false);
   const [filterData, setFilterData] = useState({
     state: true,
     move: true,
   });
 
   const devicesStateFiltered = () => {
-    const filteredDevices = deviceData.filter(
+    let filteredDevices = [...deviceData];
+    filteredDevices = filteredDevices.filter(
       (device) => device.last_status === "Device Offline"
     );
 
@@ -19,16 +21,15 @@ const AppContextProvider = ({ children }) => {
   };
 
   const devicesMoveFiltered = () => {
-    const filteredDevices = deviceData.filter(
-      (device) => device.last_speed > 0
-    );
+    let filteredDevices = [...deviceData];
+    filteredDevices = deviceData.filter((device) => device.last_speed > 0);
 
     return filteredDevices;
   };
 
-  const devicesSpeedFiltered = () => {
-    let updatedDevices = [...deviceData];
-    updatedDevices = deviceData.filter(
+  const devicesSpeedFiltered = (data) => {
+    let updatedDevices = [...data];
+    updatedDevices = data.filter(
       (device) => +device.last_speed >= +deviceSpeed
     );
 
@@ -43,8 +44,10 @@ const AppContextProvider = ({ children }) => {
   };
 
   const contextValue = {
+    speedCheckState,
     deviceData,
     filterData,
+    setSpeedCheckState,
     setFilterData,
     filterHandler,
     setDeviceSpeed,

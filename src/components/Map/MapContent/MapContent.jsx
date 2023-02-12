@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import AppContext from "../../../store/AppContext";
 import MapItems from "../MapItems/MapItems";
@@ -8,28 +8,30 @@ const MapContent = () => {
   const [defaultCenter, setDefaultCenter] = useState([12.36703, 12.38062]);
   const ctx = useContext(AppContext);
 
-  //if both filters checked, show all devices
-  const devicePosition = ctx.deviceData.map((data) => (
-    <MapItems key={data.id} data={data} />
-  ));
+  const { state, move } = ctx.filterData;
+  const speedCheck = ctx.speedCheckState;
+
+  const filteredState = ctx.devicesStateFiltered();
+  const filteredMove = ctx.devicesMoveFiltered();
+  const filterSpeed = ctx.devicesSpeedFiltered(ctx.deviceData);
+  const filteredSpeedState = ctx.devicesSpeedFiltered(filteredState);
+  const filteredSpeedMove = ctx.devicesSpeedFiltered(filteredMove);
+
+  //if both filters checked, show all devices or show devices based on speed
+  const devicePosition = (!speedCheck ? ctx.deviceData : filterSpeed).map(
+    (data) => <MapItems key={data.id} data={data} />
+  );
 
   //if filters checked, show specific devices
-  const filteredState = ctx.devicesStateFiltered();
-  const filteredStateDevices = filteredState.map((data) => (
-    <MapItems key={data.id} data={data} />
-  ));
-  const filteredMove = ctx.devicesMoveFiltered();
-  const filteredMoveDevices = filteredMove.map((data) => (
-    <MapItems key={data.id} data={data} />
-  ));
+  // Device offline filter
+  const filteredStateDevices = (
+    !speedCheck ? filteredState : filteredSpeedState
+  ).map((data) => <MapItems key={data.id} data={data} />);
 
-  const filteredSpeed = ctx.devicesSpeedFiltered();
-
-  const filteredSpeedDevices = filteredSpeed.map((data) => (
-    <MapItems key={data.id} data={data} />
-  ));
-
-  const { state, move } = ctx.filterData;
+  //Device Moving filter
+  const filteredMoveDevices = (
+    !speedCheck ? filteredMove : filteredSpeedMove
+  ).map((data) => <MapItems key={data.id} data={data} />);
 
   return (
     <MapContainer center={defaultCenter} zoom={5} scrollWheelZoom={true}>
@@ -38,9 +40,8 @@ const MapContent = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {state && move && devicePosition}
-      {state && !move && filteredStateDevices}
-      {!state && move && filteredMoveDevices}
-      {!state && !move && filteredSpeedDevices}
+      {!move && filteredStateDevices}
+      {!state && filteredMoveDevices}
     </MapContainer>
   );
 };

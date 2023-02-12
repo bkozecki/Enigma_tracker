@@ -4,8 +4,8 @@ const AppContext = createContext({
   //created for better autocompletion
   deviceData: [],
   filterData: null,
-  deviceSpeed: 0,
-  setDeviceSpeed: () => {},
+  speedCheckState: null,
+  setSpeedCheckState: () => {},
   setFilterData: () => {},
   filterHandler: () => {},
   devicesStateFiltered: () => {},
