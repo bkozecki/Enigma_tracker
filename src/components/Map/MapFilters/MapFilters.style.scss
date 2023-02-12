@@ -36,18 +36,23 @@
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    text-align: left;
   }
   &_input,
   &_label {
     cursor: pointer;
   }
   &_label {
-    font-size: 1.2rem;
+    font-size: 1rem;
   }
   .img_active {
     transform: rotate(0);
   }
+  #speed {
+    width: 20%;
+  }
 }
+
 @media only screen and (min-width: 500px) {
   .filters {
     &_option {

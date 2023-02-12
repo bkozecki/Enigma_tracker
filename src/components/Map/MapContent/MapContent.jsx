@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
 import AppContext from "../../../store/AppContext";
 import MapItems from "../MapItems/MapItems";
@@ -23,7 +23,13 @@ const MapContent = () => {
     <MapItems key={data.id} data={data} />
   ));
 
-  const { state, move } = ctx.filterChecked;
+  const filteredSpeed = ctx.devicesSpeedFiltered();
+
+  const filteredSpeedDevices = filteredSpeed.map((data) => (
+    <MapItems key={data.id} data={data} />
+  ));
+
+  const { state, move } = ctx.filterData;
 
   return (
     <MapContainer center={defaultCenter} zoom={5} scrollWheelZoom={true}>
@@ -31,9 +37,10 @@ const MapContent = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {!state && !move && devicePosition}
+      {state && move && devicePosition}
       {state && !move && filteredStateDevices}
       {!state && move && filteredMoveDevices}
+      {!state && !move && filteredSpeedDevices}
     </MapContainer>
   );
 };

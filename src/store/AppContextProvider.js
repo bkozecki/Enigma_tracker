@@ -4,9 +4,10 @@ import { API_URL } from "../utlis/utils";
 
 const AppContextProvider = ({ children }) => {
   const [deviceData, setDeviceData] = useState([]);
-  const [filterChecked, setFilterChecked] = useState({
-    state: false,
-    move: false,
+  const [deviceSpeed, setDeviceSpeed] = useState("");
+  const [filterData, setFilterData] = useState({
+    state: true,
+    move: true,
   });
 
   const devicesStateFiltered = () => {
@@ -25,20 +26,31 @@ const AppContextProvider = ({ children }) => {
     return filteredDevices;
   };
 
+  const devicesSpeedFiltered = () => {
+    let updatedDevices = [...deviceData];
+    updatedDevices = deviceData.filter(
+      (device) => +device.last_speed >= +deviceSpeed
+    );
+
+    return updatedDevices;
+  };
+
   const filterHandler = (ev) => {
     const { name, checked } = ev.target;
-    setFilterChecked((prevState) => {
+    setFilterData((prevState) => {
       return { ...prevState, [name]: checked };
     });
   };
 
   const contextValue = {
     deviceData,
-    filterChecked,
-    setFilterChecked,
+    filterData,
+    setFilterData,
     filterHandler,
+    setDeviceSpeed,
     devicesStateFiltered,
     devicesMoveFiltered,
+    devicesSpeedFiltered,
   };
 
   useEffect(() => {

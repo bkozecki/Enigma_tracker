@@ -24,7 +24,7 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           name="state"
           id="state"
           className="filters_input"
-          checked={ctx.filterChecked.state}
+          checked={ctx.filterData.state}
           onChange={ctx.filterHandler.bind(this)}
         />
       </div>
@@ -37,8 +37,25 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           name="move"
           id="move"
           className="filters_input"
-          checked={ctx.filterChecked.move}
+          checked={ctx.filterData.move}
           onChange={ctx.filterHandler.bind(this)}
+        />
+      </div>
+      <div className="filters_option">
+        <label htmlFor="move" className="filters_label">
+          Device speed more than
+        </label>
+        <input
+          type="number"
+          name="speed"
+          id="speed"
+          min="0"
+          className="filters_input"
+          value={ctx.deviceSpeed}
+          onChange={(ev) => {
+            ctx.setFilterData({ state: false, move: false });
+            ctx.setDeviceSpeed(ev.target.value);
+          }}
         />
       </div>
     </div>
