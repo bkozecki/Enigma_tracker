@@ -43,7 +43,7 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
       </div>
       <div className="filters_option">
         <label htmlFor="move" className="filters_label">
-          Device speed more than
+          Device speed more than:
         </label>
         <input
           type="number"
@@ -53,6 +53,10 @@ const MapFilters = ({ filterActive, setFilterActive }) => {
           className="filters_input"
           value={ctx.deviceSpeed}
           onChange={(ev) => {
+            if (ev.target.value === "") {
+              ctx.setFilterData({ state: true, move: true });
+              return;
+            }
             ctx.setFilterData({ state: false, move: false });
             ctx.setDeviceSpeed(ev.target.value);
           }}
